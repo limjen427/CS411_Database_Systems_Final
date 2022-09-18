@@ -1,17 +1,17 @@
-# A-team000-sample
+# A-team035-sample
 
 ## Basic Information
 
 |   Info      |        Description     |
 | ----------- | ---------------------- |
-| TeamID      |        Team-000        |
-| TeamName    |         sample         |
-| Captain     |       Abdu Alawini     |
-| Captain     |  alawini@illinois.edu  |
-| Member1     |        Kevin Pei       |
-| Member1     |   kevin2@illinois.edu  |
-| Member2     |                        |
-| Member2     |                        |
+| TeamID      |Team-035                |
+| TeamName    |MongoMongo              |
+| Captain     |Chanmin (Kevin) Kang    |
+| Captain     |chanmin2@illinois.edu   |
+| Member1     |Yoonjae Hwang           |
+| Member1     |yoonjae3@illinois.edu   |
+| Member2     |Jennifer Lim            |
+| Member2     |jylim3@illinois.edu     |
 | Member3     |                        |
 | Member3     |                        |
 
