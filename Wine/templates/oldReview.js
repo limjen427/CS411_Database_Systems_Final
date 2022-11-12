@@ -2,15 +2,15 @@ var score_dict = {};
 var review_dict = {};
 
 async function onReviewsByUser(){
-    return reviewsByUser('http://localhost:5000/recipe/user%27);
+    return reviewsByUser('http://localhost:5000/wine/user%27');
 }
 
 async function onUpdateReview() {
-    return updateReview('http://localhost:5000/rating/update%27);
+    return updateReview('http://localhost:5000/rating/update%27');
 }
 
 async function onDeleteReview() {
-    return deleteReview('http://localhost:5000/rating/delete%27);
+    return deleteReview('http://localhost:5000/rating/delete%27');
 }
 
 async function reviewsByUser(url = '') {
@@ -48,7 +48,7 @@ async function reviewsByUser(url = '') {
                     wineName = wineName.slice(2, -1)
                     review = review.slice(2, -1)
 
-                    recipeList.options[recipeList.options.length] = new Option(wineName, ratingID);
+                    wineList.options[wineList.options.length] = new Option(wineName, ratingID);
 
                     score_dict[ratingID] = score;
                     review_dict[ratingID] = review;
@@ -71,7 +71,7 @@ async function reviewsByUser(url = '') {
 
 async function onWineSelected() {
     wineList = document.getElementById("wineList")
-    ratingID = recipeList.value
+    ratingID = wineList.value
     score = score_dict[ratingID]
     review = review_dict[ratingID]
 

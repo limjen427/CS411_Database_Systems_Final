@@ -5,7 +5,7 @@ async function LoadWineList() {
 }
 
 async function RegisterNewReview(){
-    return ReviewMaker('http://127.0.0.1:5000/review/new%27);
+    return ReviewMaker('http://127.0.0.1:5000/review/create%27');
 }
 
 
