@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/css?family=Lato:100,300,300i,400&display=swap" rel="stylesheet">
+        <title>WineBottles</title>
+        
+        <meta name="msapplication-TileColor" content="#da532c">
+        <meta name="theme-color" content="#ffffff">
+        <h1> <a href="http://localhost:5000/">  WineBottles </a></h1>
+    </head>
+    <body>
+        <header>
+            <nav>
+                <div class="row">
+                    <ul class="main-nav js--main-nav">
+                        <li><a href="#features">Wine delivery</a></li>
+                        <li><a href="#cities">Our Winery</a></li>
+                        <li><a href="#plans">Sign up</a></li>
+                    </ul>
+                    <a class="mobile-nav-icon js--nav-icon"><i class="icon ion-md-menu"></i></a>
+                </div>
+            </nav>
+            <div class="hero-text-box">
+                <h1>Red? White? Sparkling? <br> Over 15,000 types of wines just for you</h1>
+                <a class="btn btn-full js--scroll-to-plans" href="wineSearch.html">Find Your Wine </a>
+                <a class="btn btn-ghost js--scroll-to-start" href="newReview.html"> New Review </a>
+                <a class="btn btn-ghost js--scroll-to-plans" href="oldReview.html"> Edit Review </a>
+            </div>
+        
+        </header>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/respond@0.9.0/main.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/selectivizr@1.0.3/selectivizr.min.js"></script>
+        <script src="https://code.iconify.design/iconify-icon/1.0.1/iconify-icon.min.js"></script>
+        <script src="vendors/js/jquery.waypoints.min.js"></script>
+        <script src="resources/js/script.js"></script>
+        
+    </body>
+
+</html>
+
+
+
+<style>
+
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    html,
+    body {
+        background-color: #fff;
+        color: #5d5d5d;
+        font-family: 'Lato', 'Arial', sans-serif;
+        font-weight: 300;
+        font-size: 20px;
+        text-rendering: optimizeLegibility;
+        overflow-x: hidden
+    }
+
+    .clearfix {zoom: 1}
+    .clearfix:after {
+        content: '.';
+        clear: both;
+        display: block;
+        height: 0;
+        visibility: hidden;
+    }
+
+    .row {
+        max-width: 1140px;
+        margin: 0 auto;
+        align-items: center;
+        text-align: center;
+
+    }
+
+    .col {
+        align-items: center;
+        text-align: center;
+    }
+
+    section {
+        padding: 80px 0;
+        
+    }
+
+    .box {
+        padding: 1%;
+        align-items: center;
+        text-align: center;
+
+    }
+
+    header {
+        background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(winery.jpg);
+        background-size: cover;
+        background-position: center;
+        height: 100vh;
+        background-attachment: fixed;
+    }
+
+    .hero-text-box {
+        position: absolute;
+        width: 1140px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    /* Main Navi */
+
+    .main-nav {
+        float: right;
+        list-style: none;
+        margin-top: 55px;
+    }
+
+    .main-nav li {
+        display: inline-block;
+        margin-left: 40px;
+    }
+
+    .main-nav li a:link,
+    .main-nav li a:visited {
+        padding: 8px 0px;
+        color: #fff;
+        text-decoration: none;
+        text-transform: uppercase;
+        font-size: 90%;
+        border-bottom: 2px solid transparent;
+        transition: border-bottom 0.2s;
+        
+    }
+
+    .main-nav li a:hover,
+    .main-nav li a:active {
+        border-bottom: 2px solid #963ae8;
+    }
+
+    .mobile-nav-icon {
+        float: right;
+        margin-top: 30px;
+        cursor: pointer;
+        display: none;
+    }
+
+    .mobile-nav-icon i {
+        font-size: 200%;
+        color: #fff;
+    }
+
+    .btn-app:link,
+    .btn-app:visited {
+        border: 0;
+    }
+
+    .btn-app img {
+        height: 50px;
+        width: auto;
+        margin-right: 10px;
+    }
+
+    textarea {
+        height: 100px;
+    }
+
+    input[type=checkbox] {
+        margin: 10px 5px 10px 0;
+    }
+
+    *:focus {outline: none;}
+
+    h1 {
+        font-weight: 300;
+        text-transform: uppercase;
+    }
+
+    h1 {
+        margin-top: 0;
+        margin-bottom: 20px;
+        color: #fff;
+        font-size: 240%;
+        word-spacing: 4px;
+        letter-spacing: 1px;
+    }
+
+    .long-copy {
+        line-height: 145%;
+        width: 70%;
+        margin-left: 15%;
+    }
+
+    .box p{
+        font-size: 90%;
+        line-height: 145%;
+        align-items: center;
+    }
+
+    a:link,
+    a:visited {
+        color: #963ae8;
+        text-decoration: none;
+        padding-bottom: 1px;
+        border-bottom: 1px solid #e67e22;
+        transition: border-bottom 0.2s, color 0.2s;
+    }
+
+    a:hover,
+    a:active {
+        color: #555;
+        border-bottom: 1px solid transparent;
+    }
+
+    .btn:link, 
+    .btn:visited,
+    input[type=submit] {
+        display: inline-block;
+        padding: 10px 30px;
+        font-weight: 300;
+        text-decoration: none;
+        border-radius: 200px;
+        transition: background-color 0.2s, border 0.2s, color 0.2s;
+    }
+
+    .btn-full:link,
+    .btn-full:visited,
+    input[type=submit] {
+        background-color: #963ae8;
+        border: 1px solid #963ae8;
+        color: #fff;
+        margin-right: 15px;
+    }
+
+    .btn-ghost:link,
+    .btn-ghost:visited {
+        padding: 10px 30px;
+        border: 1px solid #963ae8;
+        color: #963ae8;
+        margin-right: 15px;
+    }
+
+    .btn:hover,
+    .btn:active,
+    input[type=submit]:hover,
+    input[type=submit]:active{
+        background-color: #963ae8;
+    }
+
+    .btn-full:hover,
+    .btn-full:active,
+    input[type=submit] {
+        border: 1px solid #963ae8;
+    }
+
+    .btn-ghost:hover,
+    .btn-ghost:active {
+        border: 1px solid #963ae8;
+        color: #ffffff;
+    }
+
+</style>

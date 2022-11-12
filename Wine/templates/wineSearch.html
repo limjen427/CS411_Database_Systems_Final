@@ -1,0 +1,212 @@
+<!DOCTYPE html> 
+<html lang="en">
+    <head>
+        <title>WineBottles</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com"> 
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+        <link href="https://fonts.googleapis.com/css?family=Lato:100,300,300i,400&display=swap" rel="stylesheet">
+    </head>
+
+    <body>
+        <section class="section-features js--section-features" id="features">
+            <div class="row">
+                <h2>Find the Wine that suits you the best</h2>
+            </div>
+
+
+            <div class = searchContainer>
+                <div class = title>
+                    <label for="name">
+                        Search Wine:
+                    </label>
+                </div>
+                <br>
+                <div class = searchwrapper>
+                    <input type="text" id="Wine" name="Wine" value = "" style="width: 200px;height: 20px;">
+                </div>
+                <br>
+                <div class = searchwrapper>
+                    <button onclick="onClickSearch()" value="Submit" style="width: 100px;height: 30px;">
+                        Submit
+                    </button>
+                </div>
+            </div>
+        <script src="wineSearch.js"></script>
+    </body>
+
+</html>
+
+
+
+<style>
+
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    .row {
+    max-width: 1140px;
+    margin: 0 auto;
+    align-items: center;
+    text-align: center;
+
+    }
+
+    h2 {
+        font-size: 180%;
+        color: #fff;
+        word-spacing: 2px;
+        text-align: center;
+        margin-bottom: 30px;
+        letter-spacing: 1px;
+    }
+
+    .col {
+        align-items: center;
+        text-align: center;
+    }
+
+    section {
+        padding: 80px 0;
+        
+    }
+
+    .box {
+        padding: 1%;
+        align-items: center;
+        text-align: center;
+
+    }
+
+    
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        background: #23242a;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .dropdown {
+        min-width: 15em;
+        position: relative;
+        margin: 2em;
+    }
+
+    .dropdown * {
+        box-sizing: border-box;
+    }
+
+    .select {
+        background: #2a2f3b;
+        color: #fff;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border: 2px #2a2f3b solid;
+        border-radius: 0.5em;
+        padding: 1em;
+        cursor: pointer;
+        transition: background 0.3s;
+    }
+
+    .select-clicked {
+        border: 2px #26489a solid;
+        box-shadow: 0 0 0.8em #26489a;
+    }
+
+    .select:hover {
+        background: #323741;
+    }
+
+    .caret {
+        width: 0;
+        height: 0;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-top: 6px solid #fff;
+        transition: 0.3s;
+    }
+
+    .caret-rotate {
+        transform: rotate(180deg);
+    }
+
+    .menu {
+        list-style: none;
+        padding: 0.2em 0.5em;
+        background: #323741;
+        border: 1px #363a43 solid;
+        box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.2); 
+        border-radius: 0.5em;
+        color: #9fa5b5;
+        position: absolute;
+        top: 3em;
+        left: 50%;
+        width: 100%;
+        transform: translateY(-50%);
+        opacity: 0;
+        display: none;
+        transition: 0.2s;
+        z-index: 1;
+    }
+
+    .menu li {
+        padding: 0.7em 0.5em;
+        margin: 0.3em 0;
+        border-radius: 0.5em;
+        cursor: pointer;
+    }
+
+    .menu li:hover {
+        background: #2a2d35;
+    }
+
+    .active {
+        background: #23242a;
+    }
+
+    .menu-open {
+        display: block;
+        opacity: 1;
+    }
+
+    .searchContainer{
+        margin-top: 50px;
+        margin-left: auto;
+        margin-right:auto;
+        background-color: #555555;
+        height: 140px;
+        width: 500px;
+        position: relative;
+        border: 3px solid rgb(0, 3, 0);
+    }
+
+    .searchwrapper{
+        margin: 0 auto;
+        margin-left: auto;
+        margin-right: auto;
+        text-align:center;
+    }
+
+    .title{
+        padding-top: 0.3em;
+        font-size: 25px;
+        color: rgb(247, 247, 249);
+        text-align: center
+    }
+    .titlecontainer { 
+        margin-left: auto;
+        margin-right:auto;
+        background-color: #555555;
+        height: 70px;
+        width: 350px;
+        position: relative;
+        border: 3px solid rgb(0, 3, 0);
+    }
+    
+</style>
