@@ -1,159 +1,106 @@
-<!DOCTYPE html> 
-<html lang="en">
-    <head>
-        <title>WineBottles</title>
-        <link rel="preconnect" href="https://fonts.googleapis.com"> 
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
-        <br>
-    </head>
-    
-    <body onload="LoadWineList()">
-        <header>
-            <h2> Write Your Own Review </h2> <br>
-            <div class="content">
-                <div class="Wine">
-                    <form>
-                        <br>
-                        <p> Wine: </p>
-                        <select class=form type="text" name="Wine" value="" id="wineAll"></select>
-                        <br>
-                    </form> 
-                </div>
-                <br>
-                <div class="Rating">
-                    <form action="" target="_blank">
-                        <br>
-                        <p> Rating: </p>
-                        <input id="Rating" class="form" placeholder="Enter an integer value between (including) 0 and 5" type="text" name="rating" value="">
-                        <br>
-                    </form> 
-                </div>
-                <br>
-                <br>
-                <br>
-                <div class="write-review-form">
-                    
-                    <p> Write a Review: </p>
-                    <textarea id="review_box" placeholder= "Let us know what you think!" rows="10" cols="60" name=""></textarea>
-                    <br><br><br>
-                    <div class="btn-group" style="width:100%">
-                        <button onClick="onPostReview()" style="width:100%">Leave Review</button>
-                    </div>
-                    
-                </div>
-            </div>
-        </header>
-        <script type="text/javascript" src="templates/newReview.js"></script>
-    </body>
+<html>
+    <body>
+        <div>
+            <h1>Tell us your thoughts about our wine</h1>
+        </div>
 
+        <form action="/rating/create" method="get">
+            <div class=searchContainer>
+                <div class = searchwrapper>
+                    wineID <input type="number" name="wineID"><br>
+                    score <input type="number" name="score"><br>
+                    review <input type="text" name="review"><br>
+                    userID <input type="number" name="userID"><br>
+                    <!-- <input type ="submit"> -->
+                    
+                </div>
+
+                <div class=button>
+                    <button value="submit" style="width: 100px;height: 30px;">
+                        submit
+                    </button>
+                </div>
+                
+            </div>
+            
+        </form>
+
+    </body>
 </html>
 
 <style>
-
-    a {
-        text-decoration: none;
-        color: black;
-    }
-
     h1 {
-        /* max-width: 500px; */
-        margin: auto;
+        font-size: 180%;
+        color: #23242a;
+        word-spacing: 2px;
         text-align: center;
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 100px;
-    }
-
-    h2 {
-        color: #fff;
-        max-width: 500px;
-        padding-top: 1%;
-        margin: auto;
-        text-align: center;
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 50px;
-    }
-
-    .content {
-        text-align: center;
-        max-width: 500px;
-        margin: auto;
-    }
-
-    p {
-        color: white; 
-        text-align: center;
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 30px;
-        background-color: rgb(177, 177, 177, 0.5);
-    }
-
-    .form {
-        width: 492px;
-        
-    }
-
-    .btn button {
-        background-color: #555555; 
-        border: 1px solid black;
-        color: white; 
-        padding: 10px 24px; 
-        cursor: pointer;
-        float: right;
-        display: inline;
-        vertical-align: middle;
-        text-align: right;
-    }
-
-    .btn button:not(:last-child) {
-        border-right: none; /* Prevent double borders */    
-    }
-
-    /* Clear floats (clearfix hack) */
-    .btn:after {
-        content: "";
-        clear: both;
-        display: table;
-    }
-
-    /* Add a background color on hover */
-    .btn button:hover {
-        background-color: black;
-        color: white;
-    }
-
-    .btn-group button {
-        background-color: #555555; /* Green background */
-        border: 1px solid black; /* Green border */
-        color: white; /* White text */
-        padding: 10px 24px; /* Some padding */
-        cursor: pointer; /* Pointer/hand icon */
-        float: left; /* Float the buttons side by side */
-    }
-
-    .btn-group button:not(:last-child) {
-        border-right: none; /* Prevent double borders */    
-    }
-
-    /* Clear floats (clearfix hack) */
-    .btn-group:after {
-        content: "";
-        clear: both;
-        display: table;
-    }
-
-    /* Add a background color on hover */
-    .btn-group button:hover {
-        background-color: black;
-        color: white;
+        margin-bottom: 30px;
+        letter-spacing: 1px;
     }
 
     body {
-        font-family: Arial, Helvetica, sans-serif;
-        background: #23242a;
-        min-height: 100vh;            
+        /* font-family: Arial, Helvetica, sans-serif; */
+        background: #a768ff;
+        /* min-height: 100vh;
         display: flex;
         justify-content: center;
         align-items: center;
-        flex-wrap: wrap;
+        flex-wrap: wrap; */
     }
+
+    /* .title{
+        padding-top: 0.3em;
+        font-size: 25px;
+        color: rgb(0, 3, 0);
+        text-align: center
+    }
+
+    .titlecontainer { 
+        margin-left: auto;
+        margin-right:auto;
+        background-color: #555555;
+        height: 70px;
+        width: 350px;
+        position: relative;
+        border: 3px solid rgb(0, 3, 0);
+    } */
+
+    .searchContainer{
+        margin-top: auto;
+        margin-left: auto;
+        margin-right:auto;
+        margin-bottom: auto;
+        background-color: #7d398e;
+        height: 200px;
+        width: 500px;
+        position: relative;
+        border: 3px solid rgb(47, 0, 65);
+    }
+
+    .searchwrapper{
+        margin: 20 auto;
+        margin-left: auto;
+        margin-right: auto;
+        text-align:center;
+        font-size: 130%;
+        color: #23242a;
+        word-spacing: 2px;
+        text-align: center;
+        /* margin-bottom: 10px; */
+        letter-spacing: 1px;
+    }
+
+    .button{
+        margin: 20 auto;
+        margin-left: auto;
+        margin-right: auto;
+        text-align:center;
+        font-size: 130%;
+        color: #23242a;
+        word-spacing: 2px;
+        text-align: center;
+        /* margin-bottom: 10px; */
+        letter-spacing: 1px;
+    }
+
 </style>

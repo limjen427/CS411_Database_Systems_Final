@@ -8,16 +8,15 @@
         
         <meta name="msapplication-TileColor" content="#da532c">
         <meta name="theme-color" content="#ffffff">
-        <h1> <a href="http://localhost:5000/">  WineBottles </a></h1>
     </head>
     <body>
         <header>
             <nav>
                 <div class="row">
                     <ul class="main-nav js--main-nav">
-                        <li><a href="#features">Wine delivery</a></li>
-                        <li><a href="#cities">Our Winery</a></li>
-                        <li><a href="#plans">Sign up</a></li>
+                        <li><a href="/wine/all">Show all Wine</a></li>
+                        <li><a href="/wine/avgRating">Show Average Rating</a></li>
+                        <li><a href="/wine/best">Show Best Wine</a></li>
                     </ul>
                     <a class="mobile-nav-icon js--nav-icon"><i class="icon ion-md-menu"></i></a>
                 </div>
@@ -27,6 +26,16 @@
                 <a class="btn btn-full js--scroll-to-plans" href="wineSearch.html">Find Your Wine </a>
                 <a class="btn btn-ghost js--scroll-to-start" href="newReview.html"> New Review </a>
                 <a class="btn btn-ghost js--scroll-to-plans" href="oldReview.html"> Edit Review </a>
+                <form action="wine/all" method="get">
+                    <a class="btn btn-full js--scroll-to-plans">Wine List</a>
+                </form>
+                <form action="wine/best" method="get">
+                    <a class="btn btn-full js--scroll-to-plans">Best Wine</a>
+                </form>
+                <form action="wine/avgRating" method="get">
+                    <a class="btn btn-full js--scroll-to-plans">Wine Rating</a>
+                </form>
+
             </div>
         
         </header>
