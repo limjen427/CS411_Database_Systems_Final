@@ -132,3 +132,24 @@ def get_cheap_best_wine():
 
 if __name__ == '__main__':
     app.run()
+
+
+@app.route('/wine/bonus', methods = ['GET'])
+def trigger():
+    query = '''
+            CREATE TRIGGER bonus BEFORE INSERT ON Wine FOR EACH ROW 
+            BEGIN
+                SET @bonus = (SELECT SUM(price)
+                                    FROM Wine
+                                    WHERE wineID = NEW.wineID);
+                IF @bonus >= 15 THEN
+                    SET NEW.points = NEW.points + 10;
+                END IF;
+            END;
+
+            INSERT INTO Wine (wineID,name,description,winary,country,points,price,variety) VALUES (105010, "david", "nice", "A", "USA", 70, 25, "Sauvignon Blanc"), (105011, "charlie", "good", "B", "Italy", 80, 30, "Sauvignon Blanc");
+
+            SELECT * FROM Wine WHERE wineID = 105010 ORDER BY NetId
+            SELECT * FROM Wine WHERE wineID = 105011 ORDER BY NetId;
+            '''
+    return try_query(query)
