@@ -1,15 +1,41 @@
 from getpass import getpass
 from mysql.connector import connect, Error
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for, session, jsonify
 import random
 from tabulate import tabulate
-
-GET_LIMIT = 20
+import os
+import requests
 
 app = Flask(__name__)
 #CORS(app)
 # CORS(app, support_credentials=True)
 cursor = None
+
+@app.route('/weather', methods=['GET'])
+def POST_weather():
+    weather_r = requests.get("https://api.weather.gov/gridpoints/ILX/95,71/forecast/hourly")
+    weather_data = weather_r.json().get('properties').get('periods')
+
+    weather = []
+
+    for i in range(3):
+        data = weather_data[i]
+        startTime = data['startTime'][0:10] + ' ' + data['startTime'][11:13] + ':00:00'
+        endTime = data['endTime'][0:10] + ' ' + data['endTime'][11:13] + ':00:00'
+        temperature = data['temperature']
+        shortForecast = data['shortForecast']
+
+        weather.append({
+            "forecastTime": startTime + " - " + endTime,
+            "temperature": temperature,
+            "shortForecast": shortForecast
+        })
+
+    return weather, 200
+
+GET_LIMIT = 20
+
+
 
 def try_query(query):
     try:
@@ -30,6 +56,31 @@ def try_query(query):
         ret = e
     return str(ret)
 
+def try_procedure(query):
+    try:
+        with connect(
+            host="35.202.126.9",
+            user="root",
+            password="Cksals6815!",
+            database="wineDB"
+        ) as connection:
+            with connection.cursor() as cursor:
+
+                if query[0:3] == "GET":
+                    query += " LIMIT " + GET_LIMIT
+                print("trying query: " + query)
+                cursor.callproc(query)
+                ret = [r.fetchall() for r in cursor.stored_results()]
+
+                #df = pd.DataFrame(results, columns=[i[0] for i in results.description])
+                print("RET: " + str(ret))
+                connection.commit()
+    except Error as e:
+        print("FAILED")
+        ret = e
+        print(ret)
+    return str(ret)
+
 
 @app.route("/")
 def main():
@@ -48,6 +99,8 @@ def newReviewHTML():
 @app.route("/oldReview.html")
 def oldReviewHTML():
     return render_template("oldReview.html")
+
+
 
 @app.route("/wine/all", methods = ['GET'])
 def get_wine_all():
@@ -97,7 +150,7 @@ def edit_rating():
     else:
         query = "UPDATE Rating SET wineID = " + wineIDtoedit + \
             ", score = " + scoretoedit + ", review = " + reviewtoedit + ", userID = " + userIDtoedit + " WHERE ratingID = " + ratingIDtoedit
-        return [try_query(query), 'Your review is updated! The reviewID is ' + ratingIDtoedit + ' and the recorded userID is ' + userIDtoedit]
+        return [try_query(query), 'Your review is updated! The reviewID is ' + ratingIDtoedit + ' and the recorded userID is ' + userIDtoedit + '. Your new review message is ' + reviewtoedit]
     return None
 
 @app.route('/wine/avgRating', methods = ['GET'])
@@ -129,27 +182,64 @@ def get_cheap_best_wine():
 
 
 
+@app.route('/wine/ranking', methods = ['GET'])
+def refresh_rank():
+    # query = '''
+    #         CREATE TRIGGER bonus BEFORE INSERT ON Rating FOR EACH ROW
+    #         BEGIN
+    #             SET @bonus = (SELECT AVG(score)
+    #                                 FROM Rating
+    #                                 WHERE wineID = NEW.wineID);
+    #             SET @price = (SELECT price FROM Wine WHERE wineID = NEW.wineID);
+    #             IF (@bonus * 10 - @price < 0) THEN
+    #                 UPDATE Wine
+    #                 SET bonuspoints = 0
+    #                 WHERE Wine.wineID = NEW.wineID;
+    #             ELSE
+    #                 UPDATE Wine
+    #                 SET bonuspoints = @bonus * 10 - @price
+    #                 WHERE Wine.wineID = NEW.wineID;
+    #             END IF;
+    #         END;
+    #         '''
+    # query = '''
+    # CREATE PROCEDURE BestReviewer ()
+    # BEGIN
+    #     DECLARE finished INTEGER DEFAULT 0;
+    #     DECLARE curuserID INTEGER DEFAULT 0;
+    #     DECLARE curLengthSum INTEGER DEFAULT 0;
+    #     DECLARE cur CURSOR FOR (SELECT userID, SUM(LENGTH(review)) \
+    #         AS LengthSum FROM Rating NATURAL JOIN User GROUP BY userID);
+    #     DECLARE CONTINUE HANDLER FOR NOT FOUND SET finished = 1;
+    #     DROP TABLE IF EXISTS Ranking;
+    #     CREATE TABLE Ranking (
+    #         userID INT,
+    #         userRank VARCHAR(255),
+    #         LengthSum INT
+    #     );
+
+    #     OPEN cur;
+
+    #     c: LOOP
+    #         FETCH cur INTO curuserID, curLengthSum;
+    #         IF finished = 1 THEN
+    #             LEAVE c;
+    #         END IF;
+    #         IF curLengthSum < 5 THEN
+    #             INSERT INTO Ranking VALUES (curuserID, 'Bronze', curLengthSum);
+    #         ELSEIF curLengthSum >= 5 AND curLengthSum < 10 THEN
+    #             INSERT INTO Ranking VALUES (curuserID, 'Silver', curLengthSum);
+    #         ELSE
+    #             INSERT INTO Ranking VALUES (curuserID, 'Gold', curLengthSum);
+    #         END IF;
+    #     END LOOP c;
+    #     CLOSE cur;
+    # SELECT userID, userRank, ratingCount FROM Ranking NATURAL JOIN (SELECT userID, COUNT(ratingID) AS ratingCount FROM Rating GROUP BY userID) AS joinedtable \
+    #  ORDER BY LengthSum DESC;
+    # END;
+    # '''
+    # return try_query(query)
+    return try_procedure("BestReviewer")
 
 if __name__ == '__main__':
     app.run()
-
-
-@app.route('/wine/bonus', methods = ['GET'])
-def trigger():
-    query = '''
-            CREATE TRIGGER bonus BEFORE INSERT ON Wine FOR EACH ROW 
-            BEGIN
-                SET @bonus = (SELECT SUM(price)
-                                    FROM Wine
-                                    WHERE wineID = NEW.wineID);
-                IF @bonus >= 15 THEN
-                    SET NEW.points = NEW.points + 10;
-                END IF;
-            END;
-
-            INSERT INTO Wine (wineID,name,description,winary,country,points,price,variety) VALUES (105010, "david", "nice", "A", "USA", 70, 25, "Sauvignon Blanc"), (105011, "charlie", "good", "B", "Italy", 80, 30, "Sauvignon Blanc");
-
-            SELECT * FROM Wine WHERE wineID = 105010 ORDER BY NetId
-            SELECT * FROM Wine WHERE wineID = 105011 ORDER BY NetId;
-            '''
-    return try_query(query)
