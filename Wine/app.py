@@ -180,6 +180,14 @@ def get_cheap_best_wine():
             """
     return try_query(query)
 
+@app.route('/wine/bonus', methods = ['GET'])
+def get_bonuspoints():
+    query = """
+            SELECT name, bonuspoints FROM Wine
+            ORDER BY bonuspoints DESC
+            LIMIT 5
+            """
+    return try_query(query)
 
 
 @app.route('/wine/ranking', methods = ['GET'])
